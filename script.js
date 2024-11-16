@@ -13,6 +13,17 @@ let selectedJewel = null;
 let timer = 120;  // Timer for 2 minutes
 let timerInterval;
 
+// Load Sound Effects
+const swapSound = new Audio('sounds/swap.mp3');
+const clearSound = new Audio('sounds/clear.mp3');
+const gameOverSound = new Audio('sounds/gameover.mp3');
+
+// Play a sound
+function playSound(sound) {
+    sound.currentTime = 0; // Reset playback position
+    sound.play();
+}
+
 // Create the Game Board
 function createBoard() {
     board = [];
@@ -50,6 +61,8 @@ function handleJewelClick(e) {
 
         if (isAdjacent(prevRow, prevCol, row, col)) {
             swapJewels(prevRow, prevCol, row, col);
+            playSound(swapSound); // Play swap sound
+
             if (checkMatches().length > 0) {
                 updateBoard();
             } else {
@@ -134,6 +147,10 @@ function updateBoard() {
         }
     });
 
+    if (matches.length > 0) {
+        playSound(clearSound); // Play clear sound
+    }
+
     score += matches.length * 10;
     scoreDisplay.textContent = score;
 
@@ -184,12 +201,6 @@ function createNewJewels() {
     }
 }
 
-// Start the game
-function startGame() {
-    createBoard();
-    startTimer();
-}
-
 // Start countdown timer
 function startTimer() {
     timerInterval = setInterval(() => {
@@ -198,6 +209,7 @@ function startTimer() {
             timerDisplay.textContent = timer;
         } else {
             clearInterval(timerInterval);
+            playSound(gameOverSound); // Play game over sound
             alert("Game Over!");
         }
     }, 1000);
@@ -215,6 +227,12 @@ function resetGame() {
 
 // Event Listener for Reset Button
 resetButton.addEventListener("click", resetGame);
+
+// Start the game
+function startGame() {
+    createBoard();
+    startTimer();
+}
 
 // Initialize the game
 startGame();
