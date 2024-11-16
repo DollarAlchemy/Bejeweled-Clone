@@ -1,1 +1,66 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #333;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
 
+h1 {
+    margin: 20px 0;
+}
+
+/* Game Container */
+#game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Game Board */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(8, 50px);
+    grid-template-rows: repeat(8, 50px);
+    gap: 2px;
+    background-color: #222;
+    padding: 10px;
+    border: 2px solid #444;
+}
+
+.jewel {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.jewel:hover {
+    transform: scale(1.1);
+}
+
+/* Score Panel */
+#score-panel {
+    margin-top: 20px;
+}
+
+#reset-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#reset-button:hover {
+    background-color: #777;
+}
